@@ -1,4 +1,5 @@
 import { useAppSelector } from '../hooks';
+import CartItem from './CartItem';
 
 const CartContainer = () => {
 	const { cartItems, total, amount } = useAppSelector((store) => store.cart);
@@ -21,18 +22,18 @@ const CartContainer = () => {
 			</header>
 			<div>
 				{cartItems.map((item) => {
-					return <div>cart item</div>;
+					return <CartItem key={item.id} {...item} />;
 				})}
 			</div>
 			<footer>
 				<hr />
 				<div className='cart-total'>
 					<h4>
-            total <span>${total.toFixed(2)}</span>
+						total <span>${total.toFixed(2)}</span>
 					</h4>
 				</div>
 				<button className='btn clear-btn' onClick={() => console.log('очистить корзину')}>
-          clear cart
+					clear cart
 				</button>
 			</footer>
 		</section>
