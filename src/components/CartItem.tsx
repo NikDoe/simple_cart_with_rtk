@@ -1,3 +1,5 @@
+import { removeItem } from '../features/cart/cartSlice';
+import { useAppDispatch } from '../hooks';
 import { ChevronDown, ChevronUp } from '../icons';
 
 type Props = {
@@ -8,7 +10,9 @@ type Props = {
     amount: number;
 }
 
-const CartItem = ({ img, title, price, amount }: Props) => {
+const CartItem = ({ id, img, title, price, amount }: Props) => {
+	const dispatch = useAppDispatch();
+
 	return (
 		<article className='cart-item'>
 			<img src={img} alt={title} />
@@ -17,7 +21,7 @@ const CartItem = ({ img, title, price, amount }: Props) => {
 				<h4 className='item-price'>${price}</h4>
 				<button
 					className='remove-btn'
-					onClick={() => console.log('удалить товар')}
+					onClick={() => dispatch(removeItem(id))}
 				>
                     remove
 				</button>
