@@ -1,0 +1,42 @@
+import { useAppSelector } from '../hooks';
+
+const CartContainer = () => {
+	const { cartItems, total, amount } = useAppSelector((store) => store.cart);
+
+	if (amount < 1) {
+		return (
+			<section className='cart'>
+				<header>
+					<h2>your bag</h2>
+					<h4 className='empty-cart'>is currently empty</h4>
+				</header>
+			</section>
+		);
+	}
+
+	return (
+		<section className='cart'>
+			<header>
+				<h2>your bag</h2>
+			</header>
+			<div>
+				{cartItems.map((item) => {
+					return <div>cart item</div>;
+				})}
+			</div>
+			<footer>
+				<hr />
+				<div className='cart-total'>
+					<h4>
+            total <span>${total.toFixed(2)}</span>
+					</h4>
+				</div>
+				<button className='btn clear-btn' onClick={() => console.log('очистить корзину')}>
+          clear cart
+				</button>
+			</footer>
+		</section>
+	);
+};
+
+export default CartContainer;
