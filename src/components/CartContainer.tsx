@@ -1,8 +1,10 @@
-import { useAppSelector } from '../hooks';
+import { clearCart } from '../features/cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import CartItem from './CartItem';
 
 const CartContainer = () => {
 	const { cartItems, total, amount } = useAppSelector((store) => store.cart);
+	const dispatch = useAppDispatch();
 
 	if (amount < 1) {
 		return (
@@ -32,7 +34,7 @@ const CartContainer = () => {
 						total <span>${total.toFixed(2)}</span>
 					</h4>
 				</div>
-				<button className='btn clear-btn' onClick={() => console.log('очистить корзину')}>
+				<button className='btn clear-btn' onClick={() => dispatch(clearCart())}>
 					clear cart
 				</button>
 			</footer>
