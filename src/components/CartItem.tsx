@@ -1,4 +1,4 @@
-import { removeItem } from '../features/cart/cartSlice';
+import { decrease, increase, removeItem } from '../features/cart/cartSlice';
 import { useAppDispatch } from '../hooks';
 import { ChevronDown, ChevronUp } from '../icons';
 
@@ -21,7 +21,7 @@ const CartItem = ({ id, img, title, price, amount }: Props) => {
 				<h4 className='item-price'>${price}</h4>
 				<button
 					className='remove-btn'
-					onClick={() => dispatch(removeItem(id))}
+					onClick={() => dispatch(removeItem({ id }))}
 				>
                     remove
 				</button>
@@ -29,14 +29,21 @@ const CartItem = ({ id, img, title, price, amount }: Props) => {
 			<div>
 				<button
 					className='amount-btn'
-					onClick={() => console.log('увеличить количество')}
+					onClick={() => dispatch(increase({ id }))}
 				>
 					<ChevronUp />
 				</button>
 				<p className='amount'>{amount}</p>
 				<button
 					className='amount-btn'
-					onClick={() => console.log('уменьшить количество')}
+					onClick={() => {
+						if(amount === 1) {
+							dispatch(removeItem({ id }));
+							return;
+						}
+
+						dispatch(decrease({ id }));
+					}}
 				>
 					<ChevronDown />
 				</button>
