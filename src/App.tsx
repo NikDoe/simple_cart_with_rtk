@@ -1,8 +1,10 @@
+import Navbar from './components/Navbar';
+
 function App() {
 	return (
-		<div>
-			Hello there 👽
-		</div>
+		<main>
+			<Navbar />
+		</main>
 	);
 }
 
